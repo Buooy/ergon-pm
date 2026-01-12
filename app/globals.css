@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  /* Editorial color palette - warm and sophisticated */
+  --color-background: #faf9f7;
+  --color-foreground: #1a1614;
+  --color-primary: #3730a3;
+  --color-primary-foreground: #faf9f7;
+  --color-secondary: #f59e0b;
+  --color-secondary-foreground: #1a1614;
+  --color-muted: #e7e5e1;
+  --color-muted-foreground: #6b6661;
+  --color-accent: #fbbf24;
+  --color-accent-foreground: #1a1614;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #faf9f7;
+  --color-border: #d4d1cc;
+  --color-input: #e7e5e1;
+  --color-ring: #3730a3;
+  --radius: 0.75rem;
+
+  /* Typography tokens */
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-body);
+  background: var(--color-background);
+  color: var(--color-foreground);
+  position: relative;
+}
+
+/* Subtle paper texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(250, 249, 247, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(250, 249, 247, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Display typography */
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-variation-settings: 'opsz' 72;
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 48;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 32;
+}
+
+/* Custom animations */
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stagger animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* Sophisticated shadows */
+.shadow-editorial {
+  box-shadow:
+    0 1px 3px rgba(26, 22, 20, 0.06),
+    0 4px 12px rgba(26, 22, 20, 0.08);
+}
+
+.shadow-editorial-lg {
+  box-shadow:
+    0 2px 6px rgba(26, 22, 20, 0.08),
+    0 8px 24px rgba(26, 22, 20, 0.12),
+    0 16px 48px rgba(26, 22, 20, 0.08);
+}
+
+.shadow-editorial-hover {
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shadow-editorial-hover:hover {
+  box-shadow:
+    0 4px 12px rgba(26, 22, 20, 0.1),
+    0 12px 32px rgba(26, 22, 20, 0.14),
+    0 24px 64px rgba(26, 22, 20, 0.1);
+}
+
+/* Border treatments */
+.border-gradient {
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(55, 48, 163, 0.3), rgba(251, 191, 36, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
