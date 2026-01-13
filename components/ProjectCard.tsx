@@ -18,30 +18,33 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
 
   return (
     <article
-      className="group relative bg-white rounded-2xl border-2 border-border overflow-hidden shadow-editorial shadow-editorial-hover transition-all duration-300 hover:border-primary/20 h-full flex flex-col"
+      className="group relative bg-gradient-to-br from-card to-surface-elevated rounded-3xl border border-border overflow-hidden shadow-atmospheric shadow-atmospheric-hover h-full flex flex-col transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Decorative gradient accent */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-80" />
+      {/* Top Jade Accent Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-jade opacity-80 transition-all duration-200 group-hover:h-1.5 group-hover:opacity-100" />
+
+      {/* Atmospheric Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-mesh opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-60" />
 
       {/* Header section with asymmetric layout */}
-      <div className="p-6 pb-4 flex-1">
+      <div className="p-6 pb-4 flex-1 relative z-10">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex-1 min-w-0">
-            {/* Project name - editorial typography */}
+            {/* Project name - Manrope typography */}
             <Link
               href={`/projects/${project.slug}`}
               className="block group/title"
             >
-              <h3 className="font-display text-2xl font-semibold mb-2 text-foreground group-hover/title:text-primary transition-colors leading-tight">
+              <h3 className="font-display text-2xl font-bold mb-2 text-foreground group-hover/title:text-primary transition-colors leading-tight tracking-tight">
                 {project.name}
                 <ExternalLink className={`inline-block ml-2 h-4 w-4 transition-all ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}`} />
               </h3>
             </Link>
 
             {/* Description */}
-            <p className="text-muted-foreground leading-relaxed text-sm">
+            <p className="text-muted-foreground leading-relaxed text-sm font-body">
               {truncate(project.description || 'No description provided yet', 120)}
             </p>
           </div>
@@ -49,14 +52,14 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
           {/* Actions dropdown */}
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
-              <button className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
+              <button className="p-2 rounded-lg hover:bg-surface transition-colors text-muted-foreground hover:text-foreground">
                 <MoreVertical className="h-5 w-5" />
                 <span className="sr-only">Project options</span>
               </button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
               <DropdownMenu.Content
-                className="min-w-[180px] bg-white rounded-xl border border-border shadow-editorial-lg p-1.5 z-50"
+                className="min-w-[180px] bg-card rounded-xl border border-border shadow-jade p-1.5 z-50"
                 sideOffset={5}
               >
                 <DropdownMenu.Item asChild>
@@ -99,7 +102,7 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
         </div>
 
         {/* Metadata section with visual hierarchy */}
-        <div className="flex items-center gap-4 py-3 border-t border-b border-border/50">
+        <div className="flex items-center gap-4 py-3 border-t border-b border-border/30">
           <div className="flex items-center gap-2 text-sm">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
               <Layers className="h-4 w-4 text-primary" />
@@ -108,13 +111,13 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
               <div className="font-semibold text-foreground">
                 {project.contextSources.length}
               </div>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-xs text-secondary-foreground">
                 {project.contextSources.length === 1 ? 'Source' : 'Sources'}
               </div>
             </div>
           </div>
 
-          <div className="h-10 w-px bg-border" />
+          <div className="h-10 w-px bg-border/50" />
 
           <div className="flex items-center gap-2 text-sm flex-1 min-w-0">
             <Calendar className="h-4 w-4 text-muted-foreground flex-shrink-0" />
@@ -126,12 +129,12 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
       </div>
 
       {/* Action buttons - asymmetric layout */}
-      <div className="p-6 pt-4 bg-gradient-to-b from-transparent to-muted/20">
+      <div className="p-6 pt-4 bg-gradient-to-b from-transparent to-surface/40 relative z-10">
         <div className="flex items-center gap-3">
           <Link href={`/projects/${project.slug}`} className="flex-1">
             <Button
               variant="outline"
-              className="w-full border-2 hover:border-primary hover:bg-primary/5 transition-all font-medium"
+              className="w-full border-2 border-border hover:border-primary hover:bg-primary/10 transition-all font-medium"
             >
               <FolderOpen className="mr-2 h-4 w-4" />
               Open
@@ -139,19 +142,13 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
           </Link>
           <Link href={`/generate/${project.slug}`} className="flex-1">
             <Button
-              className="w-full bg-primary hover:bg-primary/90 shadow-editorial transition-all font-medium group/btn"
+              className="w-full bg-gradient-jade hover:shadow-jade transition-all duration-300 font-medium group/btn"
             >
               <FileText className="mr-2 h-4 w-4 transition-transform group-hover/btn:scale-110" />
               Generate
             </Button>
           </Link>
         </div>
-      </div>
-
-      {/* Hover effect overlay */}
-      <div className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-transparent rounded-bl-full" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/5 to-transparent rounded-tr-full" />
       </div>
     </article>
   )

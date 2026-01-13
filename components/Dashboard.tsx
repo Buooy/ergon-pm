@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Project } from '@/lib/types'
 import { ProjectCard } from './ProjectCard'
 import { Button } from './ui/button'
-import { Plus, Loader2 } from 'lucide-react'
+import { Plus, Loader2, FolderOpen, FileText } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 export function Dashboard() {
@@ -84,7 +84,7 @@ export function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary animate-glow-pulse" />
       </div>
     )
   }
@@ -92,18 +92,18 @@ export function Dashboard() {
   return (
     <div>
       {/* Section header with stats */}
-      <div className="mb-12 animate-slide-in-right">
+      <div className="mb-12 animate-slide-right">
         <div className="flex items-start justify-between gap-8 mb-6">
           <div className="flex-1">
-            <h2 className="display-md mb-3">Your Projects</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <h2 className="display-lg mb-3 font-display">Your Projects</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed font-body">
               Organize context, manage sources, and generate professional PRDs
             </p>
           </div>
 
           <Button
             onClick={() => setShowCreateDialog(true)}
-            className="shadow-editorial hover:shadow-editorial-lg transition-all duration-300 bg-primary hover:bg-primary/90 px-6 py-6 text-base font-medium"
+            className="bg-gradient-jade hover:shadow-jade transition-all duration-300 px-6 py-6 text-base font-medium"
           >
             <Plus className="mr-2 h-5 w-5" />
             New Project
@@ -112,28 +112,28 @@ export function Dashboard() {
 
         {/* Stats bar */}
         {projects.length > 0 && (
-          <div className="flex items-center gap-6 px-6 py-4 bg-white/50 backdrop-blur-sm rounded-xl border border-border/50">
+          <div className="flex items-center gap-6 px-6 py-4 bg-surface-elevated/80 backdrop-blur-sm rounded-2xl border border-border shadow-atmospheric">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center">
                 <FolderOpen className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">{projects.length}</div>
-                <div className="text-sm text-muted-foreground">Active Projects</div>
+                <div className="text-2xl font-bold text-foreground font-display">{projects.length}</div>
+                <div className="text-sm text-secondary-foreground font-body">Active Projects</div>
               </div>
             </div>
 
-            <div className="h-10 w-px bg-border" />
+            <div className="h-10 w-px bg-border/50" />
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
-                <FileText className="h-5 w-5 text-secondary" />
+              <div className="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center">
+                <FileText className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">
+                <div className="text-2xl font-bold text-foreground font-display">
                   {projects.reduce((sum, p) => sum + p.contextSources.length, 0)}
                 </div>
-                <div className="text-sm text-muted-foreground">Context Sources</div>
+                <div className="text-sm text-secondary-foreground font-body">Context Sources</div>
               </div>
             </div>
           </div>
@@ -145,21 +145,22 @@ export function Dashboard() {
           <div className="text-center max-w-md">
             {/* Empty state illustration */}
             <div className="mb-8 relative">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                <FolderOpen className="h-16 w-16 text-primary/40" />
+              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-mesh animate-glow-pulse" />
+                <FolderOpen className="h-16 w-16 text-primary/60 relative z-10" />
               </div>
-              <div className="absolute top-0 right-1/4 w-4 h-4 rounded-full bg-secondary/20 animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <div className="absolute bottom-0 left-1/4 w-3 h-3 rounded-full bg-accent/20 animate-pulse" style={{ animationDelay: '0.4s' }} />
+              <div className="absolute top-0 right-1/4 w-4 h-4 rounded-full bg-primary/30 animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <div className="absolute bottom-0 left-1/4 w-3 h-3 rounded-full bg-accent/30 animate-pulse" style={{ animationDelay: '0.4s' }} />
             </div>
 
-            <h3 className="display-md mb-3">Start Your First Project</h3>
-            <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
+            <h3 className="display-md mb-3 font-display">Start Your First Project</h3>
+            <p className="text-muted-foreground mb-8 text-lg leading-relaxed font-body">
               Create a project to organize context from multiple sources
               and generate professional product requirement documents.
             </p>
             <Button
               onClick={() => setShowCreateDialog(true)}
-              className="shadow-editorial hover:shadow-editorial-lg transition-all duration-300 bg-primary hover:bg-primary/90 px-8 py-6 text-base font-medium"
+              className="bg-gradient-jade hover:shadow-jade transition-all duration-300 px-8 py-6 text-base font-medium"
             >
               <Plus className="mr-2 h-5 w-5" />
               Create Your First Project
@@ -185,20 +186,23 @@ export function Dashboard() {
 
       <Dialog.Root open={showCreateDialog} onOpenChange={setShowCreateDialog}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-[90vw] max-w-[520px] translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-border bg-background p-8 shadow-editorial-lg data-[state=open]:animate-scale-in">
-            <div className="mb-6">
-              <Dialog.Title className="display-md mb-2">
+          <Dialog.Overlay className="fixed inset-0 bg-black/80 backdrop-blur-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-[90vw] max-w-[520px] translate-x-[-50%] translate-y-[-50%] rounded-3xl border border-border bg-card p-8 shadow-jade data-[state=open]:animate-scale-in relative overflow-hidden">
+            {/* Atmospheric gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-mesh opacity-50 pointer-events-none" />
+
+            <div className="mb-6 relative z-10">
+              <Dialog.Title className="display-md mb-2 font-display">
                 New Project
               </Dialog.Title>
-              <Dialog.Description className="text-base text-muted-foreground">
+              <Dialog.Description className="text-base text-muted-foreground font-body">
                 Create a new product project to organize context and generate PRDs.
               </Dialog.Description>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 relative z-10">
               <div>
-                <label htmlFor="name" className="text-sm font-semibold block mb-3 text-foreground">
+                <label htmlFor="name" className="text-sm font-semibold block mb-3 text-foreground font-body">
                   Project Name <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -206,7 +210,7 @@ export function Dashboard() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 border-2 border-input bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-base"
+                  className="w-full px-4 py-3 border-2 border-border bg-surface rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base text-foreground font-body placeholder:text-muted-foreground"
                   placeholder="My Product"
                   disabled={creating}
                   autoFocus
@@ -219,14 +223,14 @@ export function Dashboard() {
               </div>
 
               <div>
-                <label htmlFor="description" className="text-sm font-semibold block mb-3 text-foreground">
+                <label htmlFor="description" className="text-sm font-semibold block mb-3 text-foreground font-body">
                   Description
                 </label>
                 <textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-3 border-2 border-input bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none text-base"
+                  className="w-full px-4 py-3 border-2 border-border bg-surface rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none text-base text-foreground font-body placeholder:text-muted-foreground"
                   placeholder="What are you building?"
                   rows={4}
                   disabled={creating}
@@ -234,19 +238,19 @@ export function Dashboard() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 mt-8 pt-6 border-t border-border">
+            <div className="flex justify-end gap-3 mt-8 pt-6 border-t border-border/50 relative z-10">
               <Button
                 variant="outline"
                 onClick={() => setShowCreateDialog(false)}
                 disabled={creating}
-                className="px-6 py-2.5 font-medium"
+                className="px-6 py-2.5 font-medium border-2 border-border hover:border-primary hover:bg-primary/10"
               >
                 Cancel
               </Button>
               <Button
                 onClick={handleCreate}
                 disabled={!formData.name.trim() || creating}
-                className="shadow-editorial hover:shadow-editorial-lg transition-all duration-300 bg-primary hover:bg-primary/90 px-6 py-2.5 font-medium"
+                className="bg-gradient-jade hover:shadow-jade transition-all duration-300 px-6 py-2.5 font-medium"
               >
                 {creating ? (
                   <>
