@@ -29,7 +29,7 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
       <div className="absolute inset-0 bg-gradient-mesh opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-60" />
 
       {/* Header section with asymmetric layout */}
-      <div className="p-6 pb-4 flex-1 relative z-10">
+      <div className="p-6 md:p-8 pb-4 md:pb-5 flex-1 relative z-10">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex-1 min-w-0">
             {/* Project name - Manrope typography */}
@@ -129,7 +129,7 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
       </div>
 
       {/* Action buttons - asymmetric layout */}
-      <div className="p-6 pt-4 bg-gradient-to-b from-transparent to-surface/40 relative z-10">
+      <div className="p-6 md:p-8 pt-4 md:pt-5 bg-gradient-to-b from-transparent to-surface/40 relative z-10">
         <div className="flex items-center gap-3">
           <Link href={`/projects/${project.slug}`} className="flex-1">
             <Button

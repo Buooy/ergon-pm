@@ -92,7 +92,7 @@ export function Dashboard() {
   return (
     <div>
       {/* Section header with stats */}
-      <div className="mb-8 md:mb-12 animate-slide-right">
+      <div className="mb-10 md:mb-16 animate-slide-right">
         <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6 md:gap-8 mb-6">
           <div className="flex-1">
             <h2 className="display-lg mb-2 md:mb-3 font-display">Your Projects</h2>
@@ -112,7 +112,7 @@ export function Dashboard() {
 
         {/* Stats bar */}
         {projects.length > 0 && (
-          <div className="flex flex-wrap items-center gap-4 md:gap-6 px-4 py-3 md:px-6 md:py-4 bg-surface-elevated/80 backdrop-blur-sm rounded-2xl border border-border shadow-atmospheric">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6 px-5 py-4 md:px-8 md:py-5 bg-surface-elevated/80 backdrop-blur-sm rounded-2xl border border-border shadow-atmospheric">
             <div className="flex items-center gap-2 md:gap-3">
               <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-primary/15 flex items-center justify-center flex-shrink-0">
                 <FolderOpen className="h-4 w-4 md:h-5 md:w-5 text-primary" />
@@ -168,7 +168,7 @@ export function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-10 lg:gap-12 auto-rows-fr">
           {projects.map((project, index) => (
             <div
               key={project.id}

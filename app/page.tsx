@@ -7,9 +7,9 @@ export default function Home() {
       <div className="fixed top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-full blur-3xl -z-10" />
       <div className="fixed bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-accent/5 to-primary/5 rounded-full blur-3xl -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:px-8 lg:py-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 py-10 sm:py-14 lg:py-20 relative z-10">
         {/* Hero header with editorial styling */}
-        <header className="mb-8 sm:mb-12 md:mb-16 animate-slide-in-up">
+        <header className="mb-10 sm:mb-14 md:mb-20 animate-slide-in-up">
           <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/5 border border-primary/10">
             <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="text-xs sm:text-sm font-medium text-primary">AI-Powered Product Management</span>
