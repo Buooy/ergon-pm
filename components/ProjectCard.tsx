@@ -44,8 +44,8 @@ export function ProjectCard({ project, onDelete }: ProjectCardProps) {
             </Link>
 
             {/* Description */}
-            <p className="text-muted-foreground leading-relaxed text-sm font-body">
-              {truncate(project.description || 'No description provided yet', 120)}
+            <p className="text-muted-foreground leading-relaxed text-sm font-body line-clamp-2">
+              {project.description || 'No description provided yet'}
             </p>
           </div>
 

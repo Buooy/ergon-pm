@@ -83,6 +83,95 @@ npm run lint         # Run ESLint
 npm run type-check   # TypeScript type checking (if configured)
 ```
 
+## UI Validation Protocol
+
+**CRITICAL: Visual validation is mandatory before committing any frontend changes.**
+
+### Pre-Commit UI Checklist
+
+Before committing changes that affect UI/UX, you MUST:
+
+1. **Start Dev Server**: Ensure `npm run dev` is running on localhost:3000
+2. **Multi-Viewport Testing**: Use Playwright to test all standard viewport sizes:
+   - **Mobile**: 375x667 (iPhone SE)
+   - **Tablet**: 768x1024 (iPad)
+   - **Desktop**: 1920x1080 (Full HD)
+3. **Visual Polish Assessment**: Check for and fix the following issues:
+   - ❌ Text overflow or truncation without proper handling
+   - ❌ Inconsistent spacing across breakpoints
+   - ❌ Buttons that don't fit properly on mobile
+   - ❌ Missing responsive typography scaling
+   - ❌ Layout breaks or overlapping elements
+   - ❌ Poor contrast or readability
+   - ❌ Awkward empty states or loading states
+4. **Take Screenshots**: Capture full-page screenshots at all viewport sizes for documentation
+5. **Fix All Issues**: Address every visual inconsistency before proceeding to commit
+
+### Playwright Testing Commands
+
+```typescript
+// Resize viewport and take screenshot
+await page.setViewportSize({ width: 375, height: 667 });
+await page.screenshot({ fullPage: true });
+
+// Navigate and test interactions
+await page.goto('http://localhost:3000');
+await page.click('[data-testid="button"]');
+```
+
+### Common UI Polish Issues to Check
+
+**Responsive Design:**
+- Text sizes scale appropriately (base → sm: → md: → lg:)
+- Spacing adapts to viewport (4-6-8 pattern)
+- Flex layouts wrap correctly on mobile
+- Grid columns adjust (1 → 2 → 3 columns)
+
+**Typography:**
+- Use Tailwind responsive classes: `text-sm md:text-base lg:text-lg`
+- Implement `line-clamp-2` or `line-clamp-3` for text overflow
+- Ensure proper font hierarchy (display → body → caption)
+
+**Spacing:**
+- Mobile-first padding: `px-4 sm:px-6 lg:px-8`
+- Consistent gap values: `gap-4 md:gap-6 lg:gap-8`
+- Proper margins between sections: `mb-8 md:mb-12 lg:mb-16`
+
+**Interactive Elements:**
+- Buttons have appropriate sizes for touch targets (min 44x44px)
+- Hover states work on desktop without breaking mobile
+- Focus states are visible for keyboard navigation
+
+**Layout:**
+- Use `flex-col sm:flex-row` for stacked-to-horizontal transitions
+- Hide/show elements responsively: `hidden sm:block`
+- Ensure proper `flex-shrink-0` on icons and avatars
+
+### Workflow Integration
+
+```bash
+# Standard frontend workflow
+1. Make UI changes
+2. Start dev server: npm run dev
+3. Use Playwright to test mobile/tablet/desktop
+4. Take screenshots for all viewports
+5. Fix any visual issues identified
+6. Re-test all viewports
+7. Only commit when all viewports look polished
+8. Include viewport screenshots in commit if significant UI change
+```
+
+### Rationale
+
+UI quality directly impacts user perception of product quality. Unpolished interfaces with text overflow, awkward spacing, or broken mobile layouts create a poor user experience. By enforcing visual validation before commits, we ensure:
+
+- **Professional appearance** across all devices
+- **Consistent user experience** regardless of viewport
+- **Reduced bug reports** related to UI/UX issues
+- **Maintained design system integrity** over time
+
+**Remember: If you wouldn't show it to a stakeholder, don't commit it.**
+
 ## Key Implementation Patterns
 
 ### Context File Management

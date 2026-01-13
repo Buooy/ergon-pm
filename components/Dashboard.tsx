@@ -92,48 +92,48 @@ export function Dashboard() {
   return (
     <div>
       {/* Section header with stats */}
-      <div className="mb-12 animate-slide-right">
-        <div className="flex items-start justify-between gap-8 mb-6">
+      <div className="mb-8 md:mb-12 animate-slide-right">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6 md:gap-8 mb-6">
           <div className="flex-1">
-            <h2 className="display-lg mb-3 font-display">Your Projects</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed font-body">
+            <h2 className="display-lg mb-2 md:mb-3 font-display">Your Projects</h2>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-body">
               Organize context, manage sources, and generate professional PRDs
             </p>
           </div>
 
           <Button
             onClick={() => setShowCreateDialog(true)}
-            className="bg-gradient-jade hover:shadow-jade transition-all duration-300 px-6 py-6 text-base font-medium"
+            className="bg-gradient-jade hover:shadow-jade transition-all duration-300 px-5 py-3 md:px-6 md:py-6 text-sm md:text-base font-medium whitespace-nowrap self-start sm:self-auto"
           >
-            <Plus className="mr-2 h-5 w-5" />
+            <Plus className="mr-2 h-4 w-4 md:h-5 md:w-5" />
             New Project
           </Button>
         </div>
 
         {/* Stats bar */}
         {projects.length > 0 && (
-          <div className="flex items-center gap-6 px-6 py-4 bg-surface-elevated/80 backdrop-blur-sm rounded-2xl border border-border shadow-atmospheric">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center">
-                <FolderOpen className="h-5 w-5 text-primary" />
+          <div className="flex flex-wrap items-center gap-4 md:gap-6 px-4 py-3 md:px-6 md:py-4 bg-surface-elevated/80 backdrop-blur-sm rounded-2xl border border-border shadow-atmospheric">
+            <div className="flex items-center gap-2 md:gap-3">
+              <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-primary/15 flex items-center justify-center flex-shrink-0">
+                <FolderOpen className="h-4 w-4 md:h-5 md:w-5 text-primary" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground font-display">{projects.length}</div>
-                <div className="text-sm text-secondary-foreground font-body">Active Projects</div>
+                <div className="text-xl md:text-2xl font-bold text-foreground font-display">{projects.length}</div>
+                <div className="text-xs md:text-sm text-secondary-foreground font-body">Active Projects</div>
               </div>
             </div>
 
-            <div className="h-10 w-px bg-border/50" />
+            <div className="hidden sm:block h-8 md:h-10 w-px bg-border/50" />
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center">
-                <FileText className="h-5 w-5 text-accent" />
+            <div className="flex items-center gap-2 md:gap-3">
+              <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-accent/15 flex items-center justify-center flex-shrink-0">
+                <FileText className="h-4 w-4 md:h-5 md:w-5 text-accent" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground font-display">
+                <div className="text-xl md:text-2xl font-bold text-foreground font-display">
                   {projects.reduce((sum, p) => sum + p.contextSources.length, 0)}
                 </div>
-                <div className="text-sm text-secondary-foreground font-body">Context Sources</div>
+                <div className="text-xs md:text-sm text-secondary-foreground font-body">Context Sources</div>
               </div>
             </div>
           </div>
